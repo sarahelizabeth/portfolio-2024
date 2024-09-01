@@ -17,6 +17,8 @@ import BookshelfPage from './pages/BookshelfPage';
 import Books from './components/bookshelf/Books';
 import Films from './components/bookshelf/Films';
 import Articles from './components/bookshelf/Articles';
+import CoolApps from './components/bookshelf/CoolApps';
+import Landing from './components/bookshelf/Landing';
 
 export const UserContext = createContext();
 
@@ -60,7 +62,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Intro />,
+          element: <Landing />,
         },
         {
           path: 'books',
@@ -69,6 +71,10 @@ function App() {
         {
           path: 'films',
           element: <Films />,
+        },
+        {
+          path: 'apps',
+          element: <CoolApps />,
         },
         {
           path: 'articles',

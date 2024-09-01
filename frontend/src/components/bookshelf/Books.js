@@ -8,7 +8,6 @@ const Books = () => {
   useEffect(() => {
     API.get(`/api/bookshelf/media/?media_type=book&visible=true`)
       .then((res) => {
-        console.log(res.data);
         setBooks(res.data);
       })
       .catch(error => console.error('books list error: ', error));
@@ -16,7 +15,6 @@ const Books = () => {
 
   return (
     <div className='right-container'>
-      <h6 className='mb-3'>BOOKS</h6>
       {books.map((book, index) => (
         <MediaItem key={index} item={book} action='read' />
       ))}

@@ -3,6 +3,11 @@ import API from '../../api';
 import { Button, useToaster } from 'rsuite';
 import { UserContext } from '../../App';
 import { FaSquarePlus, FaRegSquarePlus } from "react-icons/fa6";
+import { IoCheckboxSharp } from 'react-icons/io5';
+import { LiaPlusSquareSolid } from 'react-icons/lia';
+import DescriptionTooltip from './DescriptionTooltip';
+import { BsChatLeftTextFill } from 'react-icons/bs';
+
 
 
 const MediaItem = ({ item, action }) => {
@@ -60,18 +65,34 @@ const MediaItem = ({ item, action }) => {
   }, []);
 
   return (
-    <div className='item-container'>
-      <p>{item.title}</p>
-      <p>{item.creator}</p>
-      <div className='flex gap-2'>
-        {hasLiked ? <FaSquarePlus size={35} /> : <FaRegSquarePlus size={35} />}
-        <Button size='sm' variant='ghost' onClick={() => handleLike(item)}>
-          I've {action} this!
-        </Button>
+    <div className='item-container grid grid-cols-4 gap-4'>
+      <div className='media-img-container relative'>
+        <img src={item.image} className='object-cover media-img' />
       </div>
-      <p>
-        {item.likes.length} other people have also {action} this
-      </p>
+      <div className='col-span-3 text'>
+        <div className='flex items-start'>
+          <a href={item.link} target='_blank' className='uppercase hover:underline text-black hover:text-black hover:italic font-bold grow'>{item.title}</a>
+          <span className='pt-1'>
+            <DescriptionTooltip placement='left' text={item.description} icon={<BsChatLeftTextFill size={20} />} />
+          </span>
+        </div>
+        <p className='pt-1 mb-2'>{'>'} {item.creator}</p>
+        <div className='flex justify-between gap-2 items-center'>
+          {hasLiked ? (
+            <IoCheckboxSharp size={23} />
+          ) : (
+            <div className='flex justify-start items-start w-full'>
+              <LiaPlusSquareSolid size={28} className='pt-1' />
+              <Button size='sm' variant='ghost' onClick={() => handleLike(item)}>
+                Mark as {action}
+              </Button>
+            </div>
+          )}
+          <p className='text-xs'>
+            {item.likes.length} other people have also {action} this
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
