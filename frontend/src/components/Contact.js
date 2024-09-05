@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
-import { Button, ButtonToolbar, Form, Modal, Input } from 'rsuite';
+import { Button, ButtonToolbar, Form, Modal, Input, Schema } from 'rsuite';
 import { UserContext } from '../App';
+import API from '../api';
 
 const Textarea = React.forwardRef((props, ref) => <Input {...props} as='textarea' ref={ref} />);
 
@@ -10,7 +11,7 @@ const Contact = ({ isOpen, handleClose }) => {
   const initialState = { 
     name: '', 
     email: '',
-    body: '' 
+    message: '' 
   };
   const [formValue, setFormValue] = useState(initialState);
 
@@ -19,16 +20,32 @@ const Contact = ({ isOpen, handleClose }) => {
       setFormValue({ 
         name: userContext.user.first_name, 
         email: userContext.user.email, 
-        body: ''
+        message: ''
       });
     } else {
       setFormValue(initialState);
     }
   }, [isOpen]);
 
+  const { StringType } = Schema.Types;
+  const model = Schema.Model({
+    name: StringType().isRequired('Name is required.'),
+    email: StringType().isRequired('Email is required.').isEmail('Please enter a valid email address.'),
+    message: StringType().isRequired('Message is required.'),
+  });
+
   const handleSubmit = () => {
-    console.log('contact submit: ', formValue);
-    handleClose();
+    if (!form.current.check()) {
+      console.error('Form Error');
+      return;
+    }
+
+    API.post(`/api/portfolio/contact/`, formValue)
+      .then((res) => {
+        console.log(res.data);
+        handleClose();
+      })
+      .catch(error => console.error('contact error: ', error));
   };
 
   return (
@@ -37,7 +54,7 @@ const Contact = ({ isOpen, handleClose }) => {
         <Modal.Title>Contact Me!</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form fluid ref={form} onChange={setFormValue} formValue={formValue}>
+        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue}>
           <Form.Group controlId='name'>
             <Form.ControlLabel>Name</Form.ControlLabel>
             <Form.Control name='name' />
@@ -48,9 +65,9 @@ const Contact = ({ isOpen, handleClose }) => {
             <Form.Control name='email' />
           </Form.Group>
 
-          <Form.Group controlId='body'>
-            <Form.ControlLabel>Textarea</Form.ControlLabel>
-            <Form.Control rows={5} name='body' accepter={Textarea} />
+          <Form.Group controlId='message'>
+            <Form.ControlLabel>Message</Form.ControlLabel>
+            <Form.Control rows={5} name='message' accepter={Textarea} />
           </Form.Group>
 
           <ButtonToolbar>

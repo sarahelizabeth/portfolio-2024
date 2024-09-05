@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Experience, Project, ProjectImage
+from .models import Experience, Project, ProjectImage, ContactMessage
 
 class ProjectImageInline(admin.TabularInline):
   model = ProjectImage
@@ -12,3 +12,4 @@ class ProjectAdmin(admin.ModelAdmin):
 admin.site.register(Experience)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(ProjectImage)
+admin.site.register(ContactMessage)

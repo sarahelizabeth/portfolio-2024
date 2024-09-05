@@ -75,7 +75,7 @@ export const Navigation = ({ toggleOpen }) => {
   return (
     <motion.ul className='navlist' variants={ulVariants}>
       {navigation.map((item, i) => (
-        <motion.li variants={liVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+        <motion.li key={i} variants={liVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
           <a className='text-black hover:text-black hover:font-bold' href={item.link}>
             {item.title}
           </a>

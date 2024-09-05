@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import API from '../../api';
 import { Button, Carousel, Modal } from 'rsuite';
 import { LiaExternalLinkSquareAltSolid } from 'react-icons/lia';
 
 
 const ProjectModal = ({ project, isOpen, handleClose }) => {
-  const [overflow, setOverflow] = useState(true);
-  console.log(project.images)
-
   return (
     <Modal overflow={true} open={isOpen} onClose={handleClose}>
       <Modal.Header>
@@ -31,7 +27,7 @@ const ProjectModal = ({ project, isOpen, handleClose }) => {
       </Modal.Body>
       <Modal.Footer>
         <Button href={project.link} appearance='primary' startIcon={<LiaExternalLinkSquareAltSolid />}>
-          View
+          Go to site
         </Button>
         <Button onClick={handleClose} appearance='ghost' color='red'>
           Close
