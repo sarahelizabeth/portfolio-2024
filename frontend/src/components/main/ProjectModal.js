@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import API from '../../api';
-import { Button, Modal } from 'rsuite';
+import { Button, Carousel, Modal } from 'rsuite';
 import { LiaExternalLinkSquareAltSolid } from 'react-icons/lia';
 
 
@@ -15,12 +15,12 @@ const ProjectModal = ({ project, isOpen, handleClose }) => {
         <h3 className='rubik font-semibold'>{project.title}</h3>
       </Modal.Header>
       <Modal.Body>
-        <div className='flex gap-2 w-full'>
+        <div className='w-full'>
+          <Carousel autoplay shape='bar'>
           {project.images?.map((i, index) => (
-            <div className='img-container max-w-40'>
-              <img key={index} id={index} src={API.defaults.baseURL + i.image} />
-            </div>
+            <img key={index} id={index} src={API.defaults.baseURL + i.image} />
           ))}
+          </Carousel>
         </div>
         <p className='py-3'>{project.description}</p>
         {project.tools?.map((tool, index) => (

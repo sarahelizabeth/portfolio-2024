@@ -1,8 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { MdDownload } from 'react-icons/md';
+import { RiDownload2Fill } from 'react-icons/ri';
+import { PiDownloadSimple, PiDownloadSimpleBold } from 'react-icons/pi';
+
 
 const MainPage = () => {
   const [selected, setSelected] = useState(null);
+
+  const handleResumeDownload = () => {
+    // using Java Script method to get PDF file
+    fetch('Sarah_Murray_CV_2024.pdf').then((response) => {
+      response.blob().then((blob) => {
+        // Creating new object of PDF file
+        const fileURL = window.URL.createObjectURL(blob);
+
+        // Setting various property values
+        let alink = document.createElement('a');
+        alink.href = fileURL;
+        alink.download = 'Sarah_Murray_CV_2024.pdf';
+        alink.click();
+      });
+    });
+  };
 
   let location = useLocation();
 
@@ -41,6 +61,14 @@ const MainPage = () => {
           >
             ACTIVIST
           </NavLink>
+          <button
+            className='button-shadow-white hidden md:flex justify-center align-end border-2 border-white text-white px-4 py-2 absolute bottom-10 uppercase mt-2 mb-4 hover:font-bold z-20'
+            onClick={handleResumeDownload}
+            type='submit'
+          >
+            <PiDownloadSimpleBold size={18} />
+            <span className='pl-2'>Resume</span>
+          </button>
         </div>
         <div className='w-full h-full md:h-screen row-span-3 overflow-y-scroll p-6 md:p-20'>
           <Outlet />

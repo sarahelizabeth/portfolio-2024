@@ -22,9 +22,14 @@ const variants = {
 };
 
 export const NavItem = ({ i, item }) => {
+  // const openContact = () => 
   return (
     <motion.li variants={variants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-      <a href={item.link}>{item.title}</a>
+      {item.isLink ? (
+        <a href={item.link}>{item.title}</a>
+      ) : (
+        <button onClick={item.handler}>{item.title}</button>
+      )}
     </motion.li>
   );
 };

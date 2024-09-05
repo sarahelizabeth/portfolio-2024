@@ -21,13 +21,16 @@ import CoolApps from './components/bookshelf/CoolApps';
 import Landing from './components/bookshelf/Landing';
 
 export const UserContext = createContext();
+export const RegisterContext = createContext();
+export const LoginContext = createContext();
+export const ContactContext = createContext();
 
 function App() {
   const [openRegister, setOpenRegister] = useState(false);
   const [openLogin, setOpenLogin] = useState(false);
   const [openContact, setOpenContact] = useState(false);
   const [user, setUser] = useState(null);
-  const context = useMemo(() => ({ user, setUser }), [user]);
+  const userContext = useMemo(() => ({ user, setUser }), [user]);
   
   const router = createBrowserRouter([
     {
@@ -100,15 +103,17 @@ function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={context}>
-      <NavSidebar 
-        handleOpenLogin={() => setOpenLogin(true)} 
-        handleOpenRegister={() => setOpenRegister(true)} 
-        handleOpenContact={() => setOpenContact(true)}
-      />
+    <UserContext.Provider value={userContext}>
+      <RegisterContext.Provider value={{ openRegister, setOpenRegister }}>
+        <LoginContext.Provider value={{ openLogin, setOpenLogin }}>
+          <ContactContext.Provider value={{ openContact, setOpenContact }}>
+            <NavSidebar />
+          </ContactContext.Provider>
+        </LoginContext.Provider>
+      </RegisterContext.Provider>
       <div className='w-full absolute z-10 top-4 md:top-0 flex items-center justify-center'>
         <h5 className='major-mono-display text-5xl pl-6 pt-3'>
-          <span className='text-white'>sARAH</span> <span className='text-white md:text-black'>MuRRAy</span>
+          <span className='text-white'>sARAH</span> <span className='text-white md:text-black bg-white'>MuRRAy</span>
         </h5>
       </div>
       <RouterProvider router={router} />
