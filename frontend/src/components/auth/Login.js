@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext } from 'react';
 import { UserContext } from '../../App';
-import { Button, ButtonToolbar, Modal, Form, Schema } from 'rsuite';
+import { Modal, Form, Schema } from 'rsuite';
 import Cookies from 'js-cookie';
 import API from '../../api';
 // import { login } from './apiCalls';
@@ -46,12 +46,12 @@ const Login = ({ isOpen, handleClose }) => {
   };
 
   return (
-    <Modal size='sm' open={isOpen} onClose={handleClose}>
+    <Modal size='sm' open={isOpen} onClose={handleClose} className='jetbrains-mono'>
       <Modal.Header>
-        <Modal.Title>Log In</Modal.Title>
+        <h4 className='font-bold'>Log In</h4>
       </Modal.Header>
       <Modal.Body>
-        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue}>
+        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue} className='flex flex-col'>
           <Form.Group controlId='email'>
             <Form.ControlLabel>Email</Form.ControlLabel>
             <Form.Control name='email' />
@@ -62,11 +62,13 @@ const Login = ({ isOpen, handleClose }) => {
             <Form.Control name='password' type='password' autoComplete='off' />
           </Form.Group>
 
-          <ButtonToolbar>
-            <Button onClick={handleSubmit} appearance='primary' type='submit'>
-              Submit
-            </Button>
-          </ButtonToolbar>
+          <button
+            className='text-center button-shadow-black hover:font-bold border-2 border-black px-4 py-2 uppercase mt-2 place-self-center'
+            onClick={handleSubmit}
+            type='submit'
+          >
+            Submit
+          </button>
         </Form>
       </Modal.Body>
     </Modal>

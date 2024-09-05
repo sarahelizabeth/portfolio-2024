@@ -22,7 +22,7 @@ const BookshelfPage = () => {
           className={`triangle z-100 top-[28rem] ${selected === '/bookshelf/articles' ? 'md:block' : 'hidden'}`}
         ></span>
         <div
-          id='main-nav'
+          id='bookshelf-nav'
           className='w-full h-full md:h-screen gap-8 md:gap-0 pb-3 row-span-1 centered flex-row md:flex-col sticky top-0 overflow-hidden bg-black text-white'
         >
           <NavLink

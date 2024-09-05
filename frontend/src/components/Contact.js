@@ -49,12 +49,12 @@ const Contact = ({ isOpen, handleClose }) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={handleClose}>
+    <Modal open={isOpen} onClose={handleClose} className='jetbrains-mono'>
       <Modal.Header>
-        <Modal.Title>Contact Me!</Modal.Title>
+        <h4 className='font-bold'>Contact Me!</h4>
       </Modal.Header>
       <Modal.Body>
-        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue}>
+        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue} className='flex flex-col'>
           <Form.Group controlId='name'>
             <Form.ControlLabel>Name</Form.ControlLabel>
             <Form.Control name='name' />
@@ -70,11 +70,13 @@ const Contact = ({ isOpen, handleClose }) => {
             <Form.Control rows={5} name='message' accepter={Textarea} />
           </Form.Group>
 
-          <ButtonToolbar>
-            <Button onClick={handleSubmit} appearance='primary' type='submit'>
-              Submit
-            </Button>
-          </ButtonToolbar>
+          <button
+            className='text-center button-shadow-black hover:font-bold border-2 border-black px-4 py-2 uppercase mt-2 place-self-center'
+            onClick={handleSubmit}
+            type='submit'
+          >
+            Submit
+          </button>
         </Form>
       </Modal.Body>
     </Modal>

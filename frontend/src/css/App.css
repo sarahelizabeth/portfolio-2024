@@ -41,6 +41,42 @@
   font-size: 40px;
 }
 
+#bookshelf-nav > a {
+  color: white;
+  text-decoration: none;
+}
+
+#bookshelf-nav > a#books:hover {
+  font-family: "Abril Fatface", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-shadow: 8px 6px rgba(255, 255, 255, 0.4);
+}
+
+#bookshelf-nav > a#apps:hover {
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+
+#bookshelf-nav > a#films:hover {
+  font-family: "Bangers", system-ui;
+  font-weight: 400;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+  color: black !important;
+}
+
+#bookshelf-nav > a#articles:hover {
+  font-family: "Nova Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+  background-color: white;
+  color: black !important;
+}
+
 .button-shadow-white:hover {
   -webkit-box-shadow: 4px 4px 0px 0px white;
   -moz-box-shadow: 4px 4px 0px 0px white;

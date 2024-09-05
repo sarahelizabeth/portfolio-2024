@@ -9,6 +9,7 @@ const Register = ({ isOpen, handleClose }) => {
   const userContext = useContext(UserContext);
   const [formValue, setFormValue] = useState({
     first_name: '',
+    last_name: '',
     email: '',
     password1: '',
     password2: '',
@@ -74,26 +75,28 @@ const Register = ({ isOpen, handleClose }) => {
   };
 
   return (
-    <Modal size='sm' open={isOpen} onClose={handleClose}>
+    <Modal size='sm' open={isOpen} onClose={handleClose} className='jetbrains-mono'>
       <Modal.Header>
-        <Modal.Title>Sign Up</Modal.Title>
+        <h4 className='font-bold'>Sign Up</h4>
       </Modal.Header>
       <Modal.Body>
-        <p>
-          I will never send you any annoying emails (except for an email update when I've answered your question) and your data will
-          never be used for any reason (except for stalking purposes).
+        <p className='text-xs mb-3'>
+          I will never send you any annoying emails (except for an email update when I've answered your question) and
+          your data will only be used for stalking purposes.
         </p>
-        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue}>
-          <Form.Group controlId='first-name'>
-            <Form.ControlLabel>First Name</Form.ControlLabel>
-            <Form.Control name='first_name' />
-            <Form.HelpText>This field is required</Form.HelpText>
-          </Form.Group>
+        <Form fluid ref={form} model={model} onChange={setFormValue} formValue={formValue} className='flex flex-col'>
+          <div className='md:flex md:flex-row md:justify-between'>
+            <Form.Group controlId='first-name'>
+              <Form.ControlLabel>First Name</Form.ControlLabel>
+              <Form.Control name='first_name' />
+              <Form.HelpText>This field is required</Form.HelpText>
+            </Form.Group>
 
-          <Form.Group controlId='last-name'>
-            <Form.ControlLabel>Last Name</Form.ControlLabel>
-            <Form.Control name='last_name' />
-          </Form.Group>
+            <Form.Group controlId='last-name'>
+              <Form.ControlLabel>Last Name</Form.ControlLabel>
+              <Form.Control name='last_name' />
+            </Form.Group>
+          </div>
 
           <Form.Group controlId='email'>
             <Form.ControlLabel>Email</Form.ControlLabel>
@@ -111,11 +114,13 @@ const Register = ({ isOpen, handleClose }) => {
             <Form.Control name='password2' type='password' autoComplete='off' />
           </Form.Group>
 
-          <ButtonToolbar>
-            <Button onClick={handleSubmit} appearance='primary' type='submit'>
-              Submit
-            </Button>
-          </ButtonToolbar>
+          <button
+            className='text-center button-shadow-black hover:font-bold border-2 border-black px-4 py-2 uppercase mt-2 place-self-center'
+            onClick={handleSubmit}
+            type='submit'
+          >
+            Submit
+          </button>
         </Form>
       </Modal.Body>
     </Modal>
