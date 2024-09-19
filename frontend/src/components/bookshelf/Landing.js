@@ -3,7 +3,7 @@ import React from 'react'
 const Landing = () => {
   return (
     <div className='h-full flex  items-center'>
-      <p>
+      <p className='claymorphism p-6'>
         <span className='mb-3'>THESE ARE A FEW OF MY FAVORITE THINGS</span>
         <br />
         <br />
