@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Pet, PetImage
+from .models import Pet, PetImage, PetPic
 
 class PetImageInline(admin.TabularInline):
   model = PetImage
@@ -13,5 +13,6 @@ class PetAdmin(admin.ModelAdmin):
   def get_owner_name(self, obj):
       return obj.owner.first_name
 
-admin.site.register(Pet, PetAdmin)
-admin.site.register(PetImage)
+# admin.site.register(Pet, PetAdmin)
+# admin.site.register(PetImage)
+admin.site.register(PetPic)

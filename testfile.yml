@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  db-test:
+    build: 
+      context: ./postgres
+      dockerfile: Dockerfile
+    ports:
+      - '5432:5432'
+    volumes:
+      - local_test_data:/var/lib/postgresql/data
+      - local_test_data_backups:/backups
+    environment:
+      - POSTGRES_PASSWORD=S@rahCodesG00d
+      - POSTGRES_HOST=db-test
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=portfolio2024
+      - POSTGRES_DB=local_test_data
+      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    ports:
+      - '3000:3000'
+
+    volumes:
+      - ./frontend:/app/frontend
+
+    environment:
+      - REACT_APP_API_URL=localhost
+
+    depends_on:
+      - backend-test
+
+  backend-test: 
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+
+    environment:
+      - POSTGRES_PASSWORD=S@rahCodesG00d
+      - POSTGRES_USER=portfolio2024
+      - POSTGRES_DB=portfolio_db_test
+
+    env_file:
+      - ./backend/.env.local
+
+    ports:
+      - '8000:8000'
+
+    volumes:
+      - ./backend:/app/backend
+
+    depends_on:
+      - db-test
+
+volumes:
+  local_test_data:
+  local_test_data_backups:

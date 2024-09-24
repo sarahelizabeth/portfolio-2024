@@ -3,8 +3,8 @@ from rest_framework import viewsets
 # from rest_framework.response import Response
 # from rest_framework.views import APIView
 
-from .models import Pet, PetImage
-from .serializers import PetSerializer, PetImageSerializer
+from .models import Pet, PetImage, PetPic
+from .serializers import PetSerializer, PetImageSerializer, PetPicSerializer
 
 class PetViewSet(viewsets.ModelViewSet):
   queryset = Pet.objects.all()
@@ -21,4 +21,10 @@ class PetViewSet(viewsets.ModelViewSet):
 class PetImageViewSet(viewsets.ModelViewSet):
   queryset = PetImage.objects.all()
   serializer_class = PetImageSerializer
+
+class PetPicViewSet(viewsets.ModelViewSet):
+  queryset = PetPic.objects.all()
+  serializer_class = PetPicSerializer
+  filter_backends = [DjangoFilterBackend]
+  filterset_fields = ['pet_type', 'owner']
 
